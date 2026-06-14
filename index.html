@@ -3,29 +3,82 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Carlo Vinci — Coming Soon</title>
-		<link rel="icon" type="image/x-icon" href="favicon.svg">
-		<meta name="description" content="Carlo Vinci — AI Solutions Consultant. UX/UI design, front-end development, and technical consulting. New portfolio launching soon.">
+		<link rel="icon" href="favicon.svg" type="image/svg+xml">
+		<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<meta name="theme-color" content="#2a5bd7">
+		<title>Carlo Vinci — AI Solutions Consultant</title>
+		<meta name="description" content="Carlo Vinci — AI Solutions Consultant. 27+ years across UX/UI design, front-end development, and technical consulting, now focused on AI adoption, agents, MCP, and Azure AI.">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
+		<template id="__bundler_thumbnail">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100">
+				<rect width="100" height="100" fill="#2a5bd7"/>
+				<text x="50" y="62" fill="#ffffff" font-family="Helvetica,Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-1.5" text-anchor="middle">CV</text>
+			</svg>
+		</template>
 
 		<div
-			class="cs-page">
+			class="cs-page" id="top">
+
+			<!-- top bar -->
+			<header class="cs-top">
+				<div class="wrap cs-top__inner">
+					<nav class="nav__links" aria-label="Primary">
+						<a href="#about">About me</a>
+						<a href="#services">What I do</a>
+						<!--<a href="#work">My Work</a> -->
+						<a href="#contact">Get in touch</a>
+					</nav>
+					<div class="nav__right">
+						<button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+							<svg class="i-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+							<svg class="i-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M20 14.2A8 8 0 1 1 9.8 4 6.3 6.3 0 0 0 20 14.2Z"/></svg>
+						</button>
+						<a class="btn btn--ghost btn--sm" href="https://www.linkedin.com/in/carlovinci/" target="_blank" rel="noopener">
+							<svg viewbox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H4.06V20h2.88zM5.5 4a1.67 1.67 0 1 0 0 3.34A1.67 1.67 0 0 0 5.5 4M20 20h-2.88v-6.13c0-1.54-.55-2.59-1.92-2.59a2.07 2.07 0 0 0-1.94 1.39 2.6 2.6 0 0 0-.13 1v6.33H10.2V8.5h2.77v1.57h.04a3 3 0 0 1 2.74-1.5c2.93 0 3.47 1.93 3.47 4.43z"/></svg>
+							LinkedIn
+						</a>
+					</div>
+				</div>
+			</header>
 
 			<!-- body -->
-			<main class="cs-body">
+			<main class="cs-body" id="about">
 				<div
 					class="wrap cs-grid">
 
 					<!-- left: about -->
 					<div class="reveal">
-						<div class="cs-avatar"><img src="headshot.jpg" alt="Carlo Vinci"></div>
-						<h1>Carlo Vinci</h1>
-						<p class="cs-about">Portfolio Coming Soon.</p>
+						<div class="cs-id-row">
+							<div class="cs-avatar"><img src="headshot.jpg" alt="Carlo Vinci"></div>
+							<span class="cs-badge cs-badge--open">
+								<span class="pulse"></span>Open to work</span>
+						</div>
+						<h1 class="cs-hello" style="font-weight: 100">Welcome,</h1>
+
+						<p class="cs-about cs-about--lead">I'm Carlo Vinci Melbourne based Solutions Consultant with 27+ years of experience in web technologies, spanning UX/UI design, front-end development, and technical consulting. Throughout my career, I've partnered with organisations to create engaging digital experiences, embrace new technologies, and achieve better outcomes from their technology investments.</p>
+						<div class="cs-role">AI Solutions Consultant · Technical Consulting · Azure AI</div>
+
+						<div class="cs-stats">
+							<div>
+								<div class="n">27+</div>
+								<div class="l">Years in tech</div>
+							</div>
+							<div>
+								<div class="n">50+</div>
+								<div class="l">Engagements</div>
+							</div>
+							<div>
+								<div class="n">Azure Certified</div>
+								<div class="l">AZ-900 · AI-900</div>
+							</div>
+						</div>
+
 						<div class="cs-actions">
 							<a class="btn btn--primary" href="https://www.linkedin.com/in/carlovinci/" target="_blank" rel="noopener">
 								<svg viewbox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H4.06V20h2.88zM5.5 4a1.67 1.67 0 1 0 0 3.34A1.67 1.67 0 0 0 5.5 4M20 20h-2.88v-6.13c0-1.54-.55-2.59-1.92-2.59a2.07 2.07 0 0 0-1.94 1.39 2.6 2.6 0 0 0-.13 1v6.33H10.2V8.5h2.77v1.57h.04a3 3 0 0 1 2.74-1.5c2.93 0 3.47 1.93 3.47 4.43z"/></svg>
@@ -34,23 +87,194 @@
 						</div>
 					</div>
 
+					<!-- right: portrait + whats coming -->
+					<div class="cs-card reveal">
+						<div class="cs-badges">
+							<figure class="cs-cert">
+								<img src="uploads/microsoft-certified-fundamentals-badge.svg" alt="Microsoft Certified: Azure Fundamentals (AZ-900)">
+								<figcaption class="cs-cert__pill">AZ-900</figcaption>
+							</figure>
+							<figure class="cs-cert">
+								<img src="uploads/1_JJu4MIufTv3PCS3J8V92zg.png" alt="Microsoft Certified: Azure AI Fundamentals (AI-900)">
+								<figcaption class="cs-cert__pill">AI-900</figcaption>
+							</figure>
+						</div>
+					</div>
+
 				</div>
 			</main>
+
+			<!-- services -->
+			<section class="cs-services-wrap" id="services">
+				<div class="wrap">
+					<div class="section-head reveal">
+						<span class="kicker">What I do</span>
+						<h2>Helping teams put AI to work.</h2>
+						<p>From strategy through delivery — I help organisations adopt AI and modern platforms with clarity, turning emerging tools into practical outcomes.</p>
+					</div>
+					<div class="cs-services">
+						<div class="cs-svc reveal">
+							<span class="cs-svc__ic">
+								<svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.1 5.4 5.4 2.1-5.4 2.1L12 17.5l-2.1-5.4L4.5 10l5.4-2.1z"/><circle cx="18.7" cy="5.3" r="1.2"/></svg>
+							</span>
+							<h3>AI Consulting</h3>
+							<p>AI adoption, prompt engineering, agents and MCP workflows — turning emerging AI into reliable tools that move the business forward.</p>
+						</div>
+						<div class="cs-svc reveal">
+							<span class="cs-svc__ic">
+								<svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+							</span>
+							<h3>Technical Consulting</h3>
+							<p>Discovery, onboarding and enablement — helping enterprise teams adopt platforms and AI with confidence.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- selected work -->
+			<!--  <section class="section" id="work">
+													<div class="wrap">
+														<div class="section-head reveal">
+															<span class="kicker">My Work</span>
+															<h2>AI solutions, built for real teams.</h2>
+															<p>A curated selection of personal projects showcasing how I design and build practical AI solutions — from agentic workflows to MCP integrations and retrieval.</p>
+														</div>
+			
+														<div
+															class="proj-grid">
+			
+															<article class="proj reveal">
+																<div class="proj__media">
+																	<span class="proj__cat">AI Agents · RAG</span>
+																	<image-slot id="proj-1" shape="rect" placeholder="AI Consulting Hub — preview"></image-slot>
+																</div>
+																<div class="proj__body">
+																	<div class="proj__title">
+																		<h3>AI Consulting Hub</h3>
+																	</div>
+																	<p class="proj__desc">An AI-powered consulting hub built with Claude, GitHub Copilot, AI agents, MCP servers, and RAG knowledge retrieval — helping consultants access curated knowledge and deliver consistent client advice.</p>
+																	<div class="tags">
+																		<span class="tag">Claude</span>
+																		<span class="tag">GitHub Copilot</span>
+																		<span class="tag">AI Agents</span>
+																		<span class="tag">MCP Servers</span>
+																		<span class="tag">RAG</span>
+																		<span class="tag">Azure AI</span>
+																	</div>
+																	<div class="caps">
+																		<span class="cap">Knowledge Retrieval</span>
+																		<span class="cap">Agent Workflows</span>
+																		<span class="cap">MCP Integrations</span>
+																		<span class="cap">Consistent Advice</span>
+																	</div>
+																	<div class="proj__foot">
+																		<span class="proj__tagline">Internal tooling · Kontent.ai</span>
+																	</div>
+																</div>
+															</article>
+			
+															<article class="proj reveal">
+																<div class="proj__media">
+																	<span class="proj__cat">AI · APIs</span>
+																	<image-slot id="proj-2" shape="rect" placeholder="AI Proof-of-Concept Apps — preview"></image-slot>
+																</div>
+																<div class="proj__body">
+																	<div class="proj__title">
+																		<h3>AI Proof-of-Concept Apps</h3>
+																	</div>
+																	<p class="proj__desc">8+ custom, API-driven proof-of-concept applications demonstrating AI agents, agent workflows, and MCP server integrations to validate technical approaches for enterprise clients.</p>
+																	<div class="tags">
+																		<span class="tag">Azure AI Foundry</span>
+																		<span class="tag">REST APIs</span>
+																		<span class="tag">MCP Servers</span>
+																		<span class="tag">AI Agents</span>
+																		<span class="tag">Postman</span>
+																	</div>
+																	<div class="caps">
+																		<span class="cap">Rapid Prototyping</span>
+																		<span class="cap">Agent Workflows</span>
+																		<span class="cap">API Integrations</span>
+																	</div>
+																	<div class="proj__foot">
+																		<span class="proj__tagline">Client POCs · Enterprise &amp; SME</span>
+																	</div>
+																</div>
+															</article>
+			
+														</div>
+													</div>
+												</section> -->
+
+			<!-- get in touch -->
+				<section class="section" id="contact"> <div class="wrap">
+					<div class="contact-card reveal">
+						<span class="kicker" style="justify-content:center;">Get in touch</span>
+						<h2 style="margin-top:16px;">Let's build something intelligent.</h2>
+						<p>Let's discuss AI, technology, and building smarter ways of working. I'm open to AI Solutions Consultant, Technical Consulting, and Customer Success roles.</p>
+						<div class="contact-actions">
+							<a class="btn btn--primary" href="https://www.linkedin.com/in/carlovinci/" target="_blank" rel="noopener">
+								<svg viewbox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H4.06V20h2.88zM5.5 4a1.67 1.67 0 1 0 0 3.34A1.67 1.67 0 0 0 5.5 4M20 20h-2.88v-6.13c0-1.54-.55-2.59-1.92-2.59a2.07 2.07 0 0 0-1.94 1.39 2.6 2.6 0 0 0-.13 1v6.33H10.2V8.5h2.77v1.57h.04a3 3 0 0 1 2.74-1.5c2.93 0 3.47 1.93 3.47 4.43z"/></svg>
+								Connect on LinkedIn
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- continuous tech marquee -->
+			<div class="cs-marquee" aria-hidden="true">
+				<div class="cs-marquee__track">
+					<span class="mq-pill">Azure AI Foundry</span>
+					<span class="mq-pill">Claude Code</span>
+					<span class="mq-pill">GitHub Copilot</span>
+					<span class="mq-pill">Cursor AI</span>
+					<span class="mq-pill">AI Agents</span>
+					<span class="mq-pill">MCP Servers</span>
+					<span class="mq-pill">RAG</span>
+					<span class="mq-pill">Prompt Engineering</span>
+					<span class="mq-pill">Automation</span>
+					<span class="mq-pill">Headless CMS</span>
+					<span class="mq-pill">REST APIs</span>
+					<span class="mq-pill">Postman</span>
+					<span class="mq-pill">Vercel</span>
+					<span class="mq-pill">Netlify</span>
+					<span class="mq-pill">Figma</span>
+					<span class="mq-pill">JavaScript</span>
+					<span class="mq-pill">Azure AI Foundry</span>
+					<span class="mq-pill">Claude Code</span>
+					<span class="mq-pill">GitHub Copilot</span>
+					<span class="mq-pill">Cursor AI</span>
+					<span class="mq-pill">AI Agents</span>
+					<span class="mq-pill">MCP Servers</span>
+					<span class="mq-pill">RAG</span>
+					<span class="mq-pill">Prompt Engineering</span>
+					<span class="mq-pill">Automation</span>
+					<span class="mq-pill">Headless CMS</span>
+					<span class="mq-pill">REST APIs</span>
+					<span class="mq-pill">Postman</span>
+					<span class="mq-pill">Vercel</span>
+					<span class="mq-pill">Netlify</span>
+					<span class="mq-pill">Figma</span>
+					<span class="mq-pill">JavaScript</span>
+				</div>
+			</div>
+
+			<!-- footer -->
+			<footer class="cs-foot">
+				<div class="wrap cs-foot__inner">
+					<div class="cs-foot__meta">© 2026 Carlo Vinci</div>
+					<div class="footer__social">
+						<a class="icon-btn" href="https://www.linkedin.com/in/carlovinci/" target="_blank" rel="noopener" aria-label="LinkedIn">
+							<svg viewbox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H4.06V20h2.88zM5.5 4a1.67 1.67 0 1 0 0 3.34A1.67 1.67 0 0 0 5.5 4M20 20h-2.88v-6.13c0-1.54-.55-2.59-1.92-2.59a2.07 2.07 0 0 0-1.94 1.39 2.6 2.6 0 0 0-.13 1v6.33H10.2V8.5h2.77v1.57h.04a3 3 0 0 1 2.74-1.5c2.93 0 3.47 1.93 3.47 4.43z"/></svg>
+						</a>
+					</div>
+				</div>
+			</footer>
 
 		</div>
 
 		<script src="image-slot.js"></script>
 		<script src="main.js"></script>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-F763CQQBEV"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-function gtag() {
-dataLayer.push(arguments);
-}
-gtag('js', new Date());
 
-gtag('config', 'G-F763CQQBEV');
-		</script>
 	</body>
 </html>
