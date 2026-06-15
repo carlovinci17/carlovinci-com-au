@@ -4,6 +4,13 @@
 (function () {
   "use strict";
 
+  /* ---------- years of experience (auto-increments yearly) ---------- */
+  var CAREER_START = 1999; // 27+ years as of 2026
+  var years = Math.max(1, new Date().getFullYear() - CAREER_START);
+  document.querySelectorAll(".js-years").forEach(function (el) {
+    el.textContent = String(years);
+  });
+
   /* ---------- theme ---------- */
   var THEME_KEY = "cv-theme";
   var root = document.documentElement;
@@ -54,11 +61,19 @@
   var menuBtn = document.getElementById("menu-toggle");
   var mobileMenu = document.getElementById("mobile-menu");
   if (menuBtn && mobileMenu) {
+    var setMenu = function (open) {
+      mobileMenu.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
     menuBtn.addEventListener("click", function () {
-      mobileMenu.classList.toggle("open");
+      setMenu(!mobileMenu.classList.contains("open"));
     });
     mobileMenu.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () { mobileMenu.classList.remove("open"); });
+      a.addEventListener("click", function () { setMenu(false); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setMenu(false);
     });
   }
 
