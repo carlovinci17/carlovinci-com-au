@@ -145,4 +145,134 @@
   } else {
     reveals.forEach(revealEl);
   }
+
+  /* ---------- lightbox ---------- */
+  var lbSlides = [];
+  var lbIndex = 0;
+  var lb = document.getElementById('lightbox');
+  var lbImg = lb ? lb.querySelector('.lightbox__img') : null;
+  var lbCounter = lb ? lb.querySelector('.lightbox__counter') : null;
+
+  function openLightbox(slides, idx) {
+    if (!lb) return;
+    lbSlides = slides;
+    lbIndex = idx;
+    lbImg.src = slides[idx].src;
+    lbImg.alt = slides[idx].alt;
+    lbImg.style.opacity = '1';
+    updateCounter();
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lb) return;
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function lbGo(n) {
+    if (!lbSlides.length) return;
+    lbIndex = (n + lbSlides.length) % lbSlides.length;
+    lbImg.style.opacity = '0';
+    setTimeout(function () {
+      lbImg.src = lbSlides[lbIndex].src;
+      lbImg.alt = lbSlides[lbIndex].alt;
+      lbImg.style.opacity = '1';
+      updateCounter();
+    }, 150);
+  }
+
+  function updateCounter() {
+    if (!lbCounter) return;
+    lbCounter.textContent = lbSlides.length > 1 ? (lbIndex + 1) + ' / ' + lbSlides.length : '';
+  }
+
+  if (lb) {
+    lb.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+    lb.querySelector('.lightbox__prev').addEventListener('click', function (e) {
+      e.stopPropagation();
+      lbGo(lbIndex - 1);
+    });
+    lb.querySelector('.lightbox__next').addEventListener('click', function (e) {
+      e.stopPropagation();
+      lbGo(lbIndex + 1);
+    });
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbGo(lbIndex - 1);
+      if (e.key === 'ArrowRight') lbGo(lbIndex + 1);
+    });
+  }
+
+  /* ---------- image sliders ---------- */
+  document.querySelectorAll('[data-slider]').forEach(function (slider) {
+    var slides = Array.prototype.slice.call(slider.querySelectorAll('.slider__slide'));
+    if (!slides.length) return;
+
+    var current = 0;
+    var timer = null;
+    var dotsWrap = slider.querySelector('.slider__dots');
+    var prevBtn = slider.querySelector('.slider__prev');
+    var nextBtn = slider.querySelector('.slider__next');
+    var dots = [];
+
+    slides.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'slider__dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Image ' + (i + 1));
+      dot.addEventListener('click', function (e) {
+        e.stopPropagation();
+        go(i);
+        restart();
+      });
+      if (dotsWrap) dotsWrap.appendChild(dot);
+      dots.push(dot);
+    });
+
+    if (slides.length <= 1) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (dotsWrap) dotsWrap.style.display = 'none';
+    }
+
+    function go(n) {
+      slides[current].classList.remove('is-active');
+      if (dots[current]) dots[current].classList.remove('is-active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      if (dots[current]) dots[current].classList.add('is-active');
+    }
+
+    function start() {
+      if (slides.length <= 1) return;
+      timer = setInterval(function () { go(current + 1); }, 4000);
+    }
+
+    function restart() {
+      clearInterval(timer);
+      start();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function (e) { e.stopPropagation(); go(current - 1); restart(); });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function (e) { e.stopPropagation(); go(current + 1); restart(); });
+    }
+
+    slider.addEventListener('mouseenter', function () { clearInterval(timer); });
+    slider.addEventListener('mouseleave', function () { if (slides.length > 1) start(); });
+
+    slider.addEventListener('click', function () { openLightbox(slides, current); });
+
+    start();
+  });
+
 })();
