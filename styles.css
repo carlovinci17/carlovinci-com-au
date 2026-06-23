@@ -1974,6 +1974,7 @@ img {
   }
   .cs-actions {
     margin-top: 0;
+    justify-content: center;
   }
 }
 @media (max-width: 720px) {
