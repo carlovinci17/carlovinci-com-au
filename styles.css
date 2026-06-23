@@ -1397,7 +1397,7 @@ img {
 .cs-hello {
   font-family: 'Caveat', cursive;
   font-size: clamp(46px, 6.4vw, 78px);
-  font-weight: 700;
+  font-weight: 100;
   letter-spacing: 0;
   line-height: 1;
   margin-top: 4px;
