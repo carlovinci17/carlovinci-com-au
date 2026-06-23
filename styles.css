@@ -1693,6 +1693,8 @@ img {
   display: flex;
   gap: 34px;
   margin-top: 32px;
+  justify-content: center;
+  text-align: center;
 }
 .cs-stats .n {
   font-size: 26px;
