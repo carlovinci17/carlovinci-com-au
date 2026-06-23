@@ -1536,9 +1536,21 @@ img {
   z-index: 1;
   display: grid;
   grid-template-columns: 1.35fr 0.75fr;
-  gap: clamp(36px, 5vw, 72px);
-  align-items: center;
+  column-gap: clamp(36px, 5vw, 72px);
+  row-gap: 0;
+  align-items: start;
   width: 100%;
+}
+.cs-about-col {
+  grid-column: 1;
+}
+.cs-card {
+  grid-column: 2;
+  grid-row: 1;
+}
+.cs-actions {
+  grid-column: 1;
+  grid-row: 2;
 }
 
 .cs-badge {
@@ -1946,12 +1958,20 @@ img {
 @media (max-width: 880px) {
   .cs-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    row-gap: 36px;
+  }
+  .cs-about-col,
+  .cs-card,
+  .cs-actions {
+    grid-column: 1;
+    grid-row: auto;
   }
   .cs-card {
     max-width: 360px;
-    order: 1;
     margin: 0 auto;
+  }
+  .cs-actions {
+    margin-top: 0;
   }
 }
 @media (max-width: 720px) {
