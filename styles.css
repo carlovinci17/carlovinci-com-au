@@ -1346,6 +1346,12 @@ img {
   .cs-top .nav__links {
     display: none;
   }
+  .cs-top {
+    padding: 14px 0;
+  }
+  .cs-top.is-stuck {
+    padding: 12px 0;
+  }
   .nav__burger {
     display: inline-grid;
   }
@@ -1473,16 +1479,17 @@ img {
 }
 .mobile-menu {
   overflow: hidden;
+  border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: color-mix(in oklch, var(--bg) 94%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   backdrop-filter: saturate(180%) blur(14px);
 }
 .mobile-menu__inner {
-  padding: 10px var(--gutter) 22px;
+  padding: 16px var(--gutter) 28px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 .mobile-menu a {
   display: flex;
