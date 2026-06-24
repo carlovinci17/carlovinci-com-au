@@ -1725,8 +1725,6 @@ img {
   display: flex;
   gap: 34px;
   margin-top: 32px;
-  justify-content: center;
-  text-align: center;
 }
 .cs-stats .n {
   font-size: 26px;
@@ -2012,5 +2010,10 @@ img {
 @media (max-width: 720px) {
   .cs-stats {
     gap: 24px;
+    justify-content: center;
+    text-align: center;
+  }
+  .cs-stats .l {
+    display: none;
   }
 }
