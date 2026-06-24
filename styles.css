@@ -1321,6 +1321,10 @@ img {
   }
 }
 
+/* base hidden states — must sit before the responsive overrides below */
+.nav__burger { display: none; }
+.mobile-menu { display: none; }
+
 /* ---------------------------------------------------------- responsive */
 @media (max-width: 960px) {
   :root {
@@ -1439,7 +1443,7 @@ img {
 
 /* mobile nav */
 .nav__burger {
-  display: none;
+  cursor: pointer;
 }
 .burger-icon {
   display: flex;
@@ -1468,7 +1472,6 @@ img {
   transform: translateY(-6px) rotate(-45deg);
 }
 .mobile-menu {
-  display: none;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
   background: color-mix(in oklch, var(--bg) 94%, transparent);
