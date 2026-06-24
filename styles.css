@@ -749,7 +749,9 @@ img {
   text-decoration: none;
   padding: 7px 14px;
   border-radius: 8px;
-  transition: background 0.15s, transform 0.15s;
+  transition:
+    background 0.15s,
+    transform 0.15s;
 }
 .proj__link:hover {
   background: var(--accent-press);
@@ -810,9 +812,15 @@ img {
   transition: opacity 0.2s ease;
   flex-shrink: 0;
 }
-.slider:hover .slider__btn { opacity: 1; }
-.slider__prev { left: 10px; }
-.slider__next { right: 10px; }
+.slider:hover .slider__btn {
+  opacity: 1;
+}
+.slider__prev {
+  left: 10px;
+}
+.slider__next {
+  right: 10px;
+}
 .slider__dots {
   position: absolute;
   bottom: 12px;
@@ -830,7 +838,9 @@ img {
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 .slider__dot.is-active {
   background: #fff;
@@ -878,7 +888,9 @@ img {
   justify-content: center;
   transition: background 0.2s;
 }
-.lightbox__close:hover { background: rgba(255, 255, 255, 0.18); }
+.lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
 .lightbox__nav {
   position: absolute;
   top: 50%;
@@ -895,9 +907,15 @@ img {
   justify-content: center;
   transition: background 0.2s;
 }
-.lightbox__nav:hover { background: rgba(255, 255, 255, 0.18); }
-.lightbox__prev { left: 18px; }
-.lightbox__next { right: 18px; }
+.lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.lightbox__prev {
+  left: 18px;
+}
+.lightbox__next {
+  right: 18px;
+}
 .lightbox__counter {
   position: absolute;
   bottom: 18px;
@@ -1322,8 +1340,12 @@ img {
 }
 
 /* base hidden states — must sit before the responsive overrides below */
-.nav__burger { display: none; }
-.mobile-menu { display: none; }
+.nav__burger {
+  display: none;
+}
+.mobile-menu {
+  display: none;
+}
 
 /* ---------------------------------------------------------- responsive */
 @media (max-width: 960px) {
@@ -1367,8 +1389,12 @@ img {
   .proj__link {
     margin-left: 0;
   }
-  .lightbox__prev { left: 10px; }
-  .lightbox__next { right: 10px; }
+  .lightbox__prev {
+    left: 10px;
+  }
+  .lightbox__next {
+    right: 10px;
+  }
   .lightbox__nav {
     width: 42px;
     height: 42px;
@@ -1414,7 +1440,7 @@ img {
   background: color-mix(in oklch, var(--bg) 82%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid var(--border);
   transition:
     padding 0.3s ease,
     background-color 0.3s ease,
@@ -1458,22 +1484,23 @@ img {
   height: 2px;
   background: currentColor;
   border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.25s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.25s ease;
   transform-origin: center;
 }
-[aria-expanded="true"] .burger-line:nth-child(1) {
+[aria-expanded='true'] .burger-line:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
-[aria-expanded="true"] .burger-line:nth-child(2) {
+[aria-expanded='true'] .burger-line:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
-[aria-expanded="true"] .burger-line:nth-child(3) {
+[aria-expanded='true'] .burger-line:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
 .mobile-menu {
   overflow: hidden;
-  border-bottom: 1px solid var(--border);
   background: color-mix(in oklch, var(--bg) 94%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   backdrop-filter: saturate(180%) blur(14px);
@@ -1492,7 +1519,9 @@ img {
   font-size: 17px;
   font-weight: 500;
   color: var(--text);
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 .mobile-menu a:hover,
 .mobile-menu a:active {
@@ -1985,4 +2014,3 @@ img {
     gap: 24px;
   }
 }
-
