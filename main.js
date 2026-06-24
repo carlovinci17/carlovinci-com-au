@@ -70,7 +70,11 @@
       setMenu(!mobileMenu.classList.contains("open"));
     });
     mobileMenu.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () { setMenu(false); });
+      a.addEventListener("click", function () {
+        mobileMenu.style.transition = "none";
+        setMenu(false);
+        setTimeout(function () { mobileMenu.style.transition = ""; }, 50);
+      });
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") setMenu(false);
