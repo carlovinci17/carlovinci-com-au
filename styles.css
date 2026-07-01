@@ -2047,6 +2047,15 @@ img {
 }
 
 @media (max-width: 880px) {
+  .cs-svc__tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 10px;
+  }
+  .cs-svc__tool {
+    flex: 0 0 calc(25% - 8px);
+  }
   .cs-grid {
     grid-template-columns: 1fr;
     row-gap: 36px;
@@ -2074,5 +2083,16 @@ img {
   }
   .cs-stats .l {
     display: none;
+  }
+}
+@media (max-width: 560px) {
+  .cs-svc__tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 12px;
+  }
+  .cs-svc__tool {
+    flex: 0 0 calc(25% - 9px);
   }
 }
