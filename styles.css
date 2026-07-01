@@ -1685,12 +1685,15 @@ img {
   font-size: 12.5px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: #fff;
-  background: var(--accent);
-  border: 1px solid transparent;
-  padding: 5px 13px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  padding: 5px 15px;
   border-radius: 100px;
   white-space: nowrap;
+}
+[data-theme='dark'] .cs-pill {
+  color: #fff;
 }
 .cs-about {
   font-size: clamp(16.5px, 1.9vw, 19px);
@@ -1724,6 +1727,7 @@ img {
 .cs-about .kw {
   color: var(--accent);
   font-weight: 600;
+  text-decoration: underline;
 }
 
 .cs-chips {
@@ -1735,7 +1739,7 @@ img {
 .cs-stats {
   display: flex;
   gap: 34px;
-  margin-top: 32px;
+  margin-top: 48px;
 }
 .cs-stats .n {
   font-size: 26px;
@@ -1979,6 +1983,50 @@ img {
   .cs-services {
     grid-template-columns: 1fr;
   }
+}
+
+/* AI Solutions tool logo strip */
+.cs-svc__tools {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px 4px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.cs-svc__tool {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.cs-svc__tool img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+  opacity: 0.82;
+  transition: opacity 0.2s ease;
+}
+.cs-svc__tool:hover img {
+  opacity: 1;
+}
+/* Dark-fill logos (black) — invert on dark backgrounds */
+[data-theme='dark'] .cs-svc__tool--dark img {
+  filter: invert(1);
+}
+/* White-fill logos — invert to black on light backgrounds */
+[data-theme='light'] .cs-svc__tool--white img {
+  filter: invert(1);
+}
+.cs-svc__tool figcaption {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
+  white-space: nowrap;
+  text-align: center;
 }
 
 .cs-foot {
