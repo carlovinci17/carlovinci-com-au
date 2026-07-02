@@ -24,8 +24,35 @@
     <title>Carlo Vinci | Solution Consultant</title>
     <meta
       name="description"
-      content="Carlo Vinci — Solution Consultant. 27+ years across UX/UI design, front-end development, and technical consulting, now focused on AI adoption, agents, MCP, and Azure AI."
+      content="Carlo Vinci — Solution Consultant. 27+ years across UX/UI design, front-end development, and technical consulting, now focused on AI adoption and Azure AI."
     />
+    <link rel="canonical" href="https://carlovinci.com.au/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://carlovinci.com.au/" />
+    <meta property="og:title" content="Carlo Vinci | Solution Consultant" />
+    <meta
+      property="og:description"
+      content="Carlo Vinci — Solution Consultant. 27+ years across UX/UI design, front-end development, and technical consulting, now focused on AI adoption and Azure AI."
+    />
+    <meta
+      property="og:image"
+      content="https://carlovinci.com.au/img/headshot.jpg"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Carlo Vinci",
+        "jobTitle": "Solution Consultant",
+        "url": "https://carlovinci.com.au/",
+        "image": "https://carlovinci.com.au/img/headshot.jpg",
+        "sameAs": ["https://www.linkedin.com/in/carlovinci/"]
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,20 +60,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-F763CQQBEV"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'G-F763CQQBEV');
-    </script>
   </head>
   <body>
     <template id="__bundler_thumbnail">
@@ -150,24 +163,33 @@
           <div class="cs-about-col reveal">
             <div class="cs-id-row">
               <div class="cs-avatar">
-                <img src="img/headshot.jpg" alt="Carlo Vinci" />
+                <img
+                  src="img/headshot.jpg"
+                  alt="Carlo Vinci"
+                  width="120"
+                  height="120"
+                />
               </div>
               <span class="cs-badge cs-badge--open">
                 <span class="pulse"></span>Open to work</span
               >
             </div>
-            <h1 class="cs-hello">Welcome,</h1>
+            <p class="cs-hello">Welcome,</p>
 
-            <p class="cs-about cs-about--lead">
+            <h1 class="cs-about cs-about--lead">
               I'm Carlo Vinci, a
               <b>Solution Consultant</b>
-              with over <b> <span class="js-years">27</span> years</b> of
-              experience in
+              with over
+              <b>
+                <span class="js-years">27</span>
+                years</b
+              >
+              of experience in
 
               <span class="kw">UX/UI Design</span>,
               <span class="kw">Front-end Development</span>, and
               <span class="kw">Technical Consulting</span>.
-            </p>
+            </h1>
             <p class="cs-about">
               Whether I'm running discovery workshops, designing solutions,
               sharing best practices, developing AI-powered proof of concepts,
@@ -195,6 +217,8 @@
                 <img
                   src="img/img_azure-fund-cert.svg"
                   alt="Microsoft Certified: Azure Fundamentals (AZ-900)"
+                  width="300"
+                  height="300"
                 />
                 <figcaption class="cs-cert__pill">AZ-900</figcaption>
               </figure>
@@ -202,6 +226,8 @@
                 <img
                   src="img/img_azure-fund-ai-cert.png"
                   alt="Microsoft Certified: Azure AI Fundamentals (AI-900)"
+                  width="600"
+                  height="600"
                 />
                 <figcaption class="cs-cert__pill">AI-900</figcaption>
               </figure>
@@ -271,32 +297,15 @@
                 solutions that improve productivity and streamline workflows.
               </p>
               <div class="cs-svc__tools">
-                <figure class="cs-svc__tool cs-svc__tool--dark">
-                  <img
-                    src="img/logos/logo_openai.svg"
-                    alt="OpenAI"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>OpenAI</figcaption>
-                </figure>
                 <figure class="cs-svc__tool">
                   <img
                     src="img/logos/logo_azure.svg"
                     alt="Azure AI"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Azure AI</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_foundry.svg"
-                    alt="Azure AI Foundry"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>Foundry</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -304,17 +313,9 @@
                     alt="Anthropic Claude"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Claude</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_github.svg"
-                    alt="GitHub Copilot"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>GitHub</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -322,8 +323,29 @@
                     alt="Microsoft Copilot"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Copilot</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_foundry.svg"
+                    alt="Azure AI Foundry"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Foundry</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_github.svg"
+                    alt="GitHub Copilot"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>GitHub</figcaption>
                 </figure>
                 <figure class="cs-svc__tool cs-svc__tool--dark">
                   <img
@@ -331,8 +353,19 @@
                     alt="MCP"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>MCP</figcaption>
+                </figure>
+                <figure class="cs-svc__tool cs-svc__tool--dark">
+                  <img
+                    src="img/logos/logo_openai.svg"
+                    alt="OpenAI"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>OpenAI</figcaption>
                 </figure>
               </div>
             </div>
@@ -364,35 +397,9 @@
                     alt="Microsoft Azure"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Azure</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_postman.svg"
-                    alt="Postman"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>Postman</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_github.svg"
-                    alt="GitHub"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>GitHub</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_miro.svg"
-                    alt="Miro"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>Miro</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -400,8 +407,19 @@
                     alt="Figma"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Figma</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_github.svg"
+                    alt="GitHub"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>GitHub</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -409,8 +427,29 @@
                     alt="Jira"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Jira</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_miro.svg"
+                    alt="Miro"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Miro</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_postman.svg"
+                    alt="Postman"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Postman</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -418,6 +457,7 @@
                     alt="Microsoft Teams"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Teams</figcaption>
                 </figure>
@@ -447,12 +487,13 @@
               <div class="cs-svc__tools">
                 <figure class="cs-svc__tool">
                   <img
-                    src="img/logos/logo_kontent-ai.svg"
-                    alt="Kontent.ai"
+                    src="img/logos/logo_aem.svg"
+                    alt="Adobe Experience Manager"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
-                  <figcaption>Kontent.ai</figcaption>
+                  <figcaption>AEM</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -460,35 +501,9 @@
                     alt="Contentful"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Contentful</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_sitecore.svg"
-                    alt="Sitecore"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>Sitecore</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_aem.svg"
-                    alt="Adobe Experience Manager"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>AEM</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_kentico.svg"
-                    alt="Kentico"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>Kentico</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -496,8 +511,29 @@
                     alt="GraphQL"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>GraphQL</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_kentico.svg"
+                    alt="Kentico"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Kentico</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_kontent-ai.svg"
+                    alt="Kontent.ai"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Kontent.ai</figcaption>
                 </figure>
                 <figure class="cs-svc__tool cs-svc__tool--white">
                   <img
@@ -505,8 +541,19 @@
                     alt="REST API"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>REST API</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_sitecore.svg"
+                    alt="Sitecore"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Sitecore</figcaption>
                 </figure>
               </div>
             </div>
@@ -535,19 +582,11 @@
               <div class="cs-svc__tools">
                 <figure class="cs-svc__tool">
                   <img
-                    src="img/logos/logo_vscode.webp"
-                    alt="VS Code"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>VS Code</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
                     src="img/logos/logo_azure.svg"
                     alt="Azure"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Azure</figcaption>
                 </figure>
@@ -557,17 +596,9 @@
                     alt="Claude"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Claude</figcaption>
-                </figure>
-                <figure class="cs-svc__tool">
-                  <img
-                    src="img/logos/logo_react.webp"
-                    alt="React"
-                    width="24"
-                    height="24"
-                  />
-                  <figcaption>React</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -575,17 +606,19 @@
                     alt="GitHub"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>GitHub</figcaption>
                 </figure>
-                <figure class="cs-svc__tool cs-svc__tool--dark">
+                <figure class="cs-svc__tool">
                   <img
-                    src="img/logos/logo_vercel.svg"
-                    alt="Vercel"
+                    src="img/logos/logo_react.webp"
+                    alt="React"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
-                  <figcaption>Vercel</figcaption>
+                  <figcaption>React</figcaption>
                 </figure>
                 <figure class="cs-svc__tool">
                   <img
@@ -593,8 +626,29 @@
                     alt="Supabase"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                   <figcaption>Supabase</figcaption>
+                </figure>
+                <figure class="cs-svc__tool cs-svc__tool--dark">
+                  <img
+                    src="img/logos/logo_vercel.svg"
+                    alt="Vercel"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>Vercel</figcaption>
+                </figure>
+                <figure class="cs-svc__tool">
+                  <img
+                    src="img/logos/logo_vscode.webp"
+                    alt="VS Code"
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                  <figcaption>VS Code</figcaption>
                 </figure>
               </div>
             </div>
@@ -610,11 +664,9 @@
             <h2>AI solution showcase.</h2>
             <p style="font-weight: 400">
               A collection of personal projects that showcase my interests in
-              AI, automation, digital experiences, and modern technologies.
-              <!-- Some
+              AI, automation, digital experiences, and modern technologies. Some
               are inspired by challenges I've encountered throughout my career,
-              while others are built to solve everyday problems and explore new
-              ideas. -->
+              while others are built to explore new ideas.
             </p>
           </div>
 
@@ -627,42 +679,63 @@
                     class="slider__slide is-active"
                     src="projects/mem-cap-ai/img_mem-cap_1.jpg"
                     alt="Memory Capture AI — image 1"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <img
                     class="slider__slide"
                     src="projects/mem-cap-ai/img_mem-cap_2.jpg"
                     alt="Memory Capture AI — image 2"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <img
                     class="slider__slide"
                     src="projects/mem-cap-ai/img_mem-cap_3.jpg"
                     alt="Memory Capture AI — image 3"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <img
                     class="slider__slide"
                     src="projects/mem-cap-ai/img_mem-cap_4.jpg"
                     alt="Memory Capture AI — image 4"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <img
                     class="slider__slide"
                     src="projects/mem-cap-ai/img_mem-cap_5.jpg"
                     alt="Memory Capture AI — image 5"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <img
                     class="slider__slide"
                     src="projects/mem-cap-ai/img_mem-cap_6.jpg"
                     alt="Memory Capture AI — image 6"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <img
                     class="slider__slide"
                     src="projects/mem-cap-ai/img_mem-cap_7.jpg"
-                    alt="Memory Capture AI — image 6"
+                    alt="Memory Capture AI — image 7"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
                   />
                   <button
                     class="slider__btn slider__prev"
                     aria-label="Previous image"
                   >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none">
                       <path
                         d="M10 12L6 8l4-4"
                         stroke="currentColor"
@@ -676,7 +749,7 @@
                     class="slider__btn slider__next"
                     aria-label="Next image"
                   >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none">
                       <path
                         d="M6 4l4 4-4 4"
                         stroke="currentColor"
@@ -690,7 +763,9 @@
                 </div>
               </div>
               <div class="proj__body">
-                <div class="proj__title"><h3>Memory Capture AI</h3></div>
+                <div class="proj__title">
+                  <h3>Memory Capture AI</h3>
+                </div>
                 <p class="proj__desc">
                   A voice-driven AI memory journal powered by Claude and Azure —
                   an agentic interview loop listens to spoken stories, extracts
@@ -722,7 +797,7 @@
                     class="proj__link"
                   >
                     View project
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <svg width="12" height="12" viewbox="0 0 12 12" fill="none">
                       <path
                         d="M2 10L10 2M10 2H4M10 2v6"
                         stroke="currentColor"
@@ -736,41 +811,122 @@
               </div>
             </article>
 
-            <!-- <article class="proj reveal">
+            <article class="proj reveal">
               <div class="proj__media">
                 <span class="proj__cat">AI · APIs</span>
-                <img
-                  src="img/img_project-placeholder.svg"
-                  alt="AI Proof-of-Concept Apps preview"
-                />
+                <div class="slider" data-slider>
+                  <img
+                    class="slider__slide is-active"
+                    src="projects/vortex-mcp/project-screenshots.jpg"
+                    alt="Vortex Knowledge Hub — image 1"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
+                  />
+                  <img
+                    class="slider__slide"
+                    src="projects/vortex-mcp/project-screenshots2.jpg"
+                    alt="Vortex Knowledge Hub — image 2"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
+                  />
+                  <img
+                    class="slider__slide"
+                    src="projects/vortex-mcp/project-screenshots3.jpg"
+                    alt="Vortex Knowledge Hub — image 3"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
+                  />
+                  <img
+                    class="slider__slide"
+                    src="projects/vortex-mcp/project-screenshots4.jpg"
+                    alt="Vortex Knowledge Hub — image 4"
+                    width="2547"
+                    height="2364"
+                    loading="lazy"
+                  />
+                  <button
+                    class="slider__btn slider__prev"
+                    aria-label="Previous image"
+                  >
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none">
+                      <path
+                        d="M10 12L6 8l4-4"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    class="slider__btn slider__next"
+                    aria-label="Next image"
+                  >
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none">
+                      <path
+                        d="M6 4l4 4-4 4"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <div class="slider__dots"></div>
+                </div>
               </div>
               <div class="proj__body">
-                <div class="proj__title"><h3>AI Proof-of-Concept Apps</h3></div>
+                <div class="proj__title">
+                  <h3>Vortex Knowledge MCP Hub</h3>
+                </div>
                 <p class="proj__desc">
-                  8+ custom, API-driven proof-of-concept applications
-                  demonstrating AI agents, agent workflows, and MCP server
-                  integrations to validate technical approaches for enterprise
-                  clients.
+                  An enterprise knowledge-base MCP server built on Azure
+                  Functions' native MCP tool trigger extension — exposing
+                  employee, customer, and document data as callable tools, with
+                  a full "Vera" chat frontend backed by an Azure AI Foundry
+                  agent that calls the server as its tool backend.
                 </p>
                 <div class="tags">
+                  <span class="tag">Azure Functions</span>
+                  <span class="tag">MCP Server</span>
                   <span class="tag">Azure AI Foundry</span>
-                  <span class="tag">REST APIs</span>
-                  <span class="tag">MCP Servers</span>
-                  <span class="tag">AI Agents</span>
-                  <span class="tag">Postman</span>
+                  <span class="tag">Azure AI Search</span>
+                  <span class="tag">Azure SQL Database</span>
+                  <span class="tag">Azure Blob Storage</span>
                 </div>
                 <div class="caps">
-                  <span class="cap">Rapid Prototyping</span>
-                  <span class="cap">Agent Workflows</span>
-                  <span class="cap">API Integrations</span>
+                  <span class="cap">Model Context Protocol Tools</span>
+                  <span class="cap">RAG-Powered Semantic Search</span>
+                  <span class="cap">AI Agent Chat Frontend</span>
+                  <span class="cap">Zero-Secret Managed Identity Auth</span>
                 </div>
                 <div class="proj__foot">
                   <span class="proj__tagline"
-                    >Client POCs · Enterprise &amp; SME</span
+                    >Personal project · Python + Azure Functions</span
                   >
+                  <a
+                    href="https://black-dune-027faae00.7.azurestaticapps.net/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="proj__link"
+                  >
+                    View project
+                    <svg width="12" height="12" viewbox="0 0 12 12" fill="none">
+                      <path
+                        d="M2 10L10 2M10 2H4M10 2v6"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
                 </div>
               </div>
-            </article> -->
+            </article>
           </div>
         </div>
       </section>
@@ -918,7 +1074,7 @@
       aria-label="Image viewer"
     >
       <button class="lightbox__close" aria-label="Close">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <svg width="18" height="18" viewbox="0 0 18 18" fill="none">
           <path
             d="M2 2l14 14M16 2L2 16"
             stroke="currentColor"
@@ -928,7 +1084,7 @@
         </svg>
       </button>
       <button class="lightbox__nav lightbox__prev" aria-label="Previous image">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg width="20" height="20" viewbox="0 0 20 20" fill="none">
           <path
             d="M13 16l-6-6 6-6"
             stroke="currentColor"
@@ -939,7 +1095,7 @@
         </svg>
       </button>
       <button class="lightbox__nav lightbox__next" aria-label="Next image">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg width="20" height="20" viewbox="0 0 20 20" fill="none">
           <path
             d="M7 4l6 6-6 6"
             stroke="currentColor"
