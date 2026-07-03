@@ -685,6 +685,7 @@ img {
 .proj__desc {
   color: var(--text-2);
   font-size: 15.5px;
+  margin-bottom: 22px;
 }
 .tags {
   display: flex;
@@ -697,7 +698,7 @@ img {
   letter-spacing: 0.01em;
   color: var(--text);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent-line);
   padding: 4px 10px;
   border-radius: 6px;
 }
@@ -1727,7 +1728,6 @@ img {
 .cs-about .kw {
   color: var(--accent);
   font-weight: 600;
-  text-decoration: underline;
 }
 
 .cs-chips {
