@@ -737,7 +737,7 @@ img {
   margin-top: 14px;
 }
 .proj__links {
-  margin-left: auto;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -758,6 +758,9 @@ img {
   transition:
     background 0.15s,
     transform 0.15s;
+}
+.proj__link:not(.proj__link--ghost) {
+  margin-left: auto;
 }
 .proj__link:hover {
   background: var(--accent-press);
