@@ -697,7 +697,7 @@ img {
   font-size: 12px;
   letter-spacing: 0.01em;
   color: var(--text);
-  background: var(--surface);
+  background: var(--accent-soft);
   border: 1px solid var(--accent-line);
   padding: 4px 10px;
   border-radius: 6px;
@@ -734,10 +734,15 @@ img {
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: 0.01em;
-  color: var(--text-3);
+  margin-top: 14px;
+}
+.proj__links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .proj__link {
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -757,6 +762,20 @@ img {
 .proj__link:hover {
   background: var(--accent-press);
   transform: translateY(-1px);
+}
+.proj__link--ghost {
+  color: var(--text-1);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.proj__link--ghost:hover {
+  background: var(--surface-2, var(--border));
+  transform: translateY(-1px);
+}
+.proj__link--ghost img {
+  width: 13px;
+  height: 13px;
+  display: block;
 }
 
 /* ---------------------------------------------------------- image slider */
@@ -1387,8 +1406,9 @@ img {
     flex-wrap: wrap;
     gap: 12px;
   }
-  .proj__link {
+  .proj__links {
     margin-left: 0;
+    flex-wrap: wrap;
   }
   .lightbox__prev {
     left: 10px;
