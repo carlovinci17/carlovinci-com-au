@@ -1,0 +1,7 @@
+node_modules
+img
+projects
+*.png
+*.jpg
+*.svg
+*.webp
