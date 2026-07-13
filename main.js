@@ -224,6 +224,47 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /* ---------- scroll-spy: highlight the current section's nav link ---------- */
+  const spySections = ["about", "services", "work", "contact"]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  const spyLinks = document.querySelectorAll(
+    '.nav__links a[href^="#"], .mobile-menu a[href^="#"]:not(.mobile-menu__cta)'
+  );
+  function setActiveLink(id) {
+    spyLinks.forEach((a) => {
+      a.classList.toggle("is-active", a.getAttribute("href") === "#" + id);
+    });
+  }
+  if (
+    spySections.length &&
+    spyLinks.length &&
+    "IntersectionObserver" in window
+  ) {
+    // #about is the first section — you start inside it with no scroll yet,
+    // so it may never cross the thin observation band below. Seed it as the
+    // default, and keep forcing it near the very top where the band can also
+    // miss it on the way back up.
+    setActiveLink("about");
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY < 80) setActiveLink("about");
+      },
+      { passive: true }
+    );
+
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) setActiveLink(en.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    spySections.forEach((section) => spy.observe(section));
+  }
+
   /* ---------- mobile menu ---------- */
   const menuBtn = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");

@@ -12,6 +12,7 @@
   /* accent (tweakable) */
   --accent: #2a5bd7;
   --accent-secondary: #26cafb;
+  --accent-tertiary: #6237ff;
   --accent-press: oklch(from var(--accent) calc(l - 0.07) c h);
   --accent-fg: #ffffff;
   --accent-soft: color-mix(in oklch, var(--accent) 11%, transparent);
@@ -54,6 +55,7 @@
 
 [data-theme="dark"] {
   --accent-fg: #ffffff;
+  --accent-tertiary: #9779f3;
   --accent-soft: color-mix(in oklch, var(--accent) 20%, transparent);
   --accent-line: color-mix(in oklch, var(--accent-secondary) 42%, transparent);
 
@@ -321,8 +323,24 @@ img {
     background-color 0.18s;
 }
 .nav__links a:hover {
-  color: var(--text);
+  color: var(--accent);
   background: var(--bg-2);
+}
+[data-theme="dark"] .nav__links a:hover {
+  color: var(--accent-secondary);
+}
+.nav__links a.is-active:not([href="#about"]) {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-secondary),
+    var(--accent-tertiary)
+  );
+  color: var(--accent-fg);
+}
+.nav__links a[href="#about"].is-active {
+  background: none;
+  color: var(--text-2);
 }
 .nav__right {
   margin-left: auto;
@@ -963,10 +981,25 @@ img {
     background 0.15s ease,
     color 0.15s ease;
 }
-.mobile-menu a:hover,
-.mobile-menu a:active {
+.mobile-menu a:not(.mobile-menu__cta):hover {
   background: var(--bg-2);
   color: var(--accent);
+}
+[data-theme="dark"] .mobile-menu a:not(.mobile-menu__cta):hover {
+  color: var(--accent-secondary);
+}
+.mobile-menu a:not(.mobile-menu__cta).is-active:not([href="#about"]) {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-secondary),
+    var(--accent-tertiary)
+  );
+  color: var(--accent-fg);
+}
+.mobile-menu a[href="#about"].is-active {
+  background: none;
+  color: var(--text);
 }
 .mobile-menu__cta {
   margin-top: 10px;
@@ -1130,7 +1163,12 @@ img {
   line-height: 1;
   margin-top: 4px;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-secondary),
+    var(--accent-tertiary)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1143,7 +1181,7 @@ img {
   margin-top: 18px;
 }
 .cs-about--lead b {
-  color: var(--text);
+  color: var(--accent-tertiary);
   font-weight: 600;
 }
 .cs-about .kw {
