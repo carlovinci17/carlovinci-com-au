@@ -48,6 +48,173 @@
     });
   }
 
+  /* ---------- page background: full-page scroll + cursor parallax network ---------- */
+  (function initPageBg() {
+    const canvas = document.getElementById("page-bg");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const reduceMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let points = [];
+    let w = 0,
+      h = 0;
+    let rect = canvas.getBoundingClientRect(); // cached; only recomputed on resize
+    const mouse = { x: -9999, y: -9999 };
+    const parTarget = { x: 0, y: 0 };
+    const parSmooth = { x: 0, y: 0 };
+    const MAX_SHIFT = 46; // px, cursor-driven depth shift at full depth
+    const SCROLL_FACTOR = 0.15; // scroll-driven depth shift, far layer ~= 0, near layer visibly drifts
+    const MOUSE_RADIUS = 160;
+    const LINK_DIST = 130;
+    const FRAME_MS = 33; // cap the draw loop at ~30fps — ambient motion doesn't need 60fps
+
+    function wrap(v, max) {
+      return ((v % max) + max) % max;
+    }
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR — avoid 3x overdraw on high-density phones
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      rect = canvas.getBoundingClientRect();
+
+      const count = Math.round((w * h) / 13000);
+      points = [];
+      for (let i = 0; i < count; i++) {
+        const depth = Math.random();
+        points.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          r: 0.4 + depth * 1.4,
+          depth,
+          tw: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+
+    function draw() {
+      if (!w || !h) return;
+      const dark = window.cvGetTheme() === "dark";
+      ctx.clearRect(0, 0, w, h);
+
+      const starColor = dark ? [255, 255, 255] : [30, 36, 56];
+      const lineColor = "42,91,215";
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+
+      if (!reduceMotion) {
+        parSmooth.x += (parTarget.x - parSmooth.x) * 0.06;
+        parSmooth.y += (parTarget.y - parSmooth.y) * 0.06;
+      }
+
+      // near-mouse points only — avoids checking every point against every
+      // other point just to find the handful actually close to the cursor.
+      const near = [];
+      for (const p of points) {
+        if (!reduceMotion) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+          p.tw += 0.02;
+        }
+        const scrollShift = scrollY * p.depth * SCROLL_FACTOR;
+        p.px = p.x + parSmooth.x * p.depth * MAX_SHIFT;
+        p.py = wrap(p.y + parSmooth.y * p.depth * MAX_SHIFT - scrollShift, h);
+
+        const dm = Math.hypot(p.px - mouse.x, p.py - mouse.y);
+        if (dm <= MOUSE_RADIUS) near.push({ p, dm });
+      }
+
+      for (let a = 0; a < near.length; a++) {
+        const pa = near[a].p,
+          da = near[a].dm;
+        for (let b = a + 1; b < near.length; b++) {
+          const pb = near[b].p,
+            db = near[b].dm;
+          const d = Math.hypot(pa.px - pb.px, pa.py - pb.py);
+          if (d < LINK_DIST) {
+            const alpha =
+              (1 - d / LINK_DIST) *
+              (1 - Math.max(da, db) / MOUSE_RADIUS) *
+              (dark ? 0.7 : 0.5);
+            ctx.strokeStyle = "rgba(" + lineColor + "," + alpha + ")";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(pa.px, pa.py);
+            ctx.lineTo(pb.px, pb.py);
+            ctx.stroke();
+          }
+        }
+        const alphaM = (1 - da / MOUSE_RADIUS) * (dark ? 0.9 : 0.6);
+        ctx.strokeStyle = "rgba(" + lineColor + "," + alphaM + ")";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(pa.px, pa.py);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.stroke();
+      }
+
+      for (const pk of points) {
+        const twv = reduceMotion ? 0.6 : (Math.sin(pk.tw) + 1) / 2;
+        const alphaS = dark ? 0.35 + twv * 0.55 : 0.25 + twv * 0.45;
+        ctx.fillStyle = "rgba(" + starColor.join(",") + "," + alphaS + ")";
+        ctx.beginPath();
+        ctx.arc(pk.px, pk.py, pk.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    let lastFrame = 0;
+    function loop(now) {
+      if (!lastFrame || now - lastFrame >= FRAME_MS) {
+        draw();
+        lastFrame = now;
+      }
+      if (!reduceMotion) requestAnimationFrame(loop);
+    }
+
+    // canvas is pointer-events:none (it sits behind all page content), so
+    // track the cursor at the window level instead of on the canvas itself.
+    // rect is cached (not read here) to avoid forcing layout on every move.
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      parTarget.x = (mouse.x / rect.width) * 2 - 1;
+      parTarget.y = (mouse.y / rect.height) * 2 - 1;
+      if (reduceMotion) draw();
+    });
+    document.addEventListener("mouseleave", () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+      parTarget.x = 0;
+      parTarget.y = 0;
+      if (reduceMotion) draw();
+    });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (reduceMotion) draw();
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", () => {
+      resize();
+      if (reduceMotion) draw();
+    });
+
+    resize();
+    requestAnimationFrame(loop);
+  })();
+
   /* ---------- nav stuck state ---------- */
   const nav = document.getElementById("nav");
   function onScroll() {
