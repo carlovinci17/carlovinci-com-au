@@ -55,7 +55,7 @@
 [data-theme="dark"] {
   --accent-fg: #ffffff;
   --accent-soft: color-mix(in oklch, var(--accent) 20%, transparent);
-  --accent-line: color-mix(in oklch, var(--accent) 42%, transparent);
+  --accent-line: color-mix(in oklch, var(--accent-secondary) 42%, transparent);
 
   --bg: oklch(0.165 0.006 265);
   --bg-2: oklch(0.195 0.007 265);
@@ -187,11 +187,14 @@ img {
   font-size: 16.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent-secondary);
+  color: var(--accent);
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+}
+[data-theme="dark"] .kicker {
+  color: var(--accent-secondary);
 }
 .kicker::before {
   content: "";
