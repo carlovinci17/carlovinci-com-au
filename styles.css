@@ -422,10 +422,13 @@ img {
   font-size: 12px;
   letter-spacing: 0.01em;
   color: var(--text);
-  background: var(--accent-secondary-soft);
+  background: var(--accent-soft);
   border: 1px solid var(--accent-line);
   padding: 4px 10px;
   border-radius: 6px;
+}
+[data-theme="dark"] .tag {
+  background: var(--accent-secondary-soft);
 }
 .caps {
   display: flex;
@@ -815,11 +818,16 @@ img {
   }
   .proj__foot {
     flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
   }
   .proj__links {
     margin-left: 0;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+  .proj__link:not(.proj__link--ghost) {
+    margin-left: 0;
   }
   .lightbox__prev {
     left: 10px;
