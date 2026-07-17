@@ -1251,11 +1251,42 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 18px;
+  position: relative;
+}
+.cs-cert figure::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(96px, 11vw, 130px);
+  height: clamp(96px, 11vw, 130px);
+  transform: translate(-50%, -15%);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--accent) 55%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.cs-cert:hover figure::before {
+  opacity: 1;
 }
 .cs-cert img {
   width: clamp(96px, 11vw, 130px);
   height: auto;
+  position: relative;
+  z-index: 1;
   filter: drop-shadow(0 12px 28px oklch(0.2 0.02 260 / 0.16));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.cs-cert:hover img {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 12px 28px oklch(0.2 0.02 260 / 0.16))
+    drop-shadow(0 0 22px color-mix(in oklch, var(--accent) 45%, transparent));
 }
 .cs-cert__pill {
   font-family: var(--font-mono);
@@ -1269,6 +1300,18 @@ img {
   border-radius: 100px;
   box-shadow: var(--shadow-sm);
   white-space: nowrap;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+}
+.cs-cert:hover .cs-cert__pill {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+  box-shadow: 0 6px 18px color-mix(in oklch, var(--accent) 28%, transparent);
+  transform: translateY(-2px);
+}
+[data-theme="dark"] .cs-cert:hover .cs-cert__pill {
+  color: #fff;
 }
 .cs-card image-slot {
   width: 100%;
