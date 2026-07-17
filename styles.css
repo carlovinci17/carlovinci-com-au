@@ -1206,6 +1206,16 @@ img {
   color: var(--text-3);
   margin-top: 2px;
 }
+.cs-stats .l a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.cs-stats .l a:hover {
+  color: var(--text);
+  border-bottom-color: currentColor;
+}
 .cs-actions {
   display: flex;
   gap: 12px;
@@ -1227,6 +1237,15 @@ img {
   flex-wrap: wrap;
 }
 .cs-cert {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+}
+.cs-cert figure {
   margin: 0;
   display: flex;
   flex-direction: column;
