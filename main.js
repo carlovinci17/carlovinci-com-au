@@ -9,10 +9,9 @@
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- years of experience (auto-increments yearly) ---------- */
-  // Start years only — never a computed answer. Baking "27 years as of 2027"
-  // into a comment is what let these drift out of sync in the first place.
+  // Start year only, never a computed answer — baking "27 years as of 2027"
+  // into a comment is what let this drift out of sync before.
   const CAREER_START = 1999; // building for the web since 1999
-  const AI_START = 2023; // AI-first since 2023
   const thisYear = new Date().getFullYear();
 
   function setYears(selector, startYear) {
@@ -23,7 +22,6 @@
   }
 
   setYears(".js-years", CAREER_START);
-  setYears(".js-ai-years", AI_START);
 
   /* ---------- theme ---------- */
   const THEME_KEY = "cv-theme";

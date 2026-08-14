@@ -1,0 +1,18 @@
+# Dev-only files — no reason to ship these to the CDN.
+node_modules
+
+# design review captures (see shots.sh)
+.shots
+.shot-tmp.html
+shots.sh
+
+# tooling config
+.prettierrc.json
+.prettierignore
+.stylelintrc.json
+.htmlhintrc
+.vscode
+.idea
+
+# repo docs
+README.md
