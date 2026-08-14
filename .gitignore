@@ -4,3 +4,7 @@
 node_modules/
 .env
 .env.*
+
+# design review screenshots
+.shots/
+.shot-tmp.html

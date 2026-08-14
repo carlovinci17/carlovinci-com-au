@@ -4,12 +4,24 @@
 (() => {
   "use strict";
 
+  const prefersReducedMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   /* ---------- years of experience (auto-increments yearly) ---------- */
-  const CAREER_START = 1999; // 27+ years as of 2026
-  const years = Math.max(1, new Date().getFullYear() - CAREER_START);
-  document.querySelectorAll(".js-years").forEach((el) => {
-    el.textContent = String(years);
-  });
+  const CAREER_START = 1999; // 27 years front-end as of 2027
+  const AI_START = 2024; // 4 years AI-first as of 2027
+  const thisYear = new Date().getFullYear();
+
+  function setYears(selector, startYear) {
+    const years = Math.max(1, thisYear - startYear);
+    document.querySelectorAll(selector).forEach((el) => {
+      el.textContent = String(years);
+    });
+  }
+
+  setYears(".js-years", CAREER_START);
+  setYears(".js-ai-years", AI_START);
 
   /* ---------- theme ---------- */
   const THEME_KEY = "cv-theme";
@@ -48,34 +60,39 @@
     });
   }
 
-  /* ---------- page background: full-page scroll + cursor parallax network ---------- */
+  /* ---------- page background: a layout perpetually reflowing ----------
+     Replaces the particle constellation, which read as generic "tech" and
+     said nothing about front-end work. This draws the 12-column grid the
+     page itself is built on, with blocks easing between column spans like a
+     responsive layout settling. Same budget as before: DPR capped at 2,
+     ~30fps, cursor + scroll parallax, static under reduced motion. */
   (function initPageBg() {
     const canvas = document.getElementById("page-bg");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    const reduceMotion =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    let points = [];
+    const COLS = 12;
+    const MAX_CONTENT = 1180; // matches --maxw so the grid aligns with content
+    const MAX_SHIFT = 46;
+    const SCROLL_FACTOR = 0.15;
+    const GLOW_RADIUS = 260;
+    const FRAME_MS = 33;
+
     let w = 0,
-      h = 0;
-    let rect = canvas.getBoundingClientRect(); // cached; only recomputed on resize
+      h = 0,
+      colW = 0,
+      originX = 0;
+    let blocks = [];
+    let rect = canvas.getBoundingClientRect(); // cached; recomputed on resize
     const mouse = { x: -9999, y: -9999 };
     const parTarget = { x: 0, y: 0 };
     const parSmooth = { x: 0, y: 0 };
-    const MAX_SHIFT = 46; // px, cursor-driven depth shift at full depth
-    const SCROLL_FACTOR = 0.15; // scroll-driven depth shift, far layer ~= 0, near layer visibly drifts
-    const MOUSE_RADIUS = 160;
-    const LINK_DIST = 130;
-    const FRAME_MS = 33; // cap the draw loop at ~30fps — ambient motion doesn't need 60fps
 
-    function wrap(v, max) {
-      return ((v % max) + max) % max;
-    }
+    const wrap = (v, max) => ((v % max) + max) % max;
+    const randSpan = () => 2 + Math.floor(Math.random() * 5); // 2-6 columns
 
     function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR — avoid 3x overdraw on high-density phones
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR
       w = canvas.clientWidth;
       h = canvas.clientHeight;
       canvas.width = w * dpr;
@@ -83,20 +100,55 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       rect = canvas.getBoundingClientRect();
 
-      const count = Math.round((w * h) / 13000);
-      points = [];
+      const contentW = Math.min(w * 0.92, MAX_CONTENT);
+      colW = contentW / COLS;
+      originX = (w - contentW) / 2;
+
+      const count = Math.max(9, Math.round(h / 95));
+      blocks = [];
       for (let i = 0; i < count; i++) {
         const depth = Math.random();
-        points.push({
-          x: Math.random() * w,
+        const span = randSpan();
+        blocks.push({
+          col: Math.floor(Math.random() * (COLS - span + 1)),
+          span,
+          spanTarget: span,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: (Math.random() - 0.5) * 0.15,
-          r: 0.4 + depth * 1.4,
+          height: 26 + depth * 64,
           depth,
-          tw: Math.random() * Math.PI * 2,
+          accent: Math.random() < 0.22,
+          wait: Math.random() * 150,
         });
       }
+    }
+
+    // ease toward the target span, dwell there, then pick a new one
+    function settle(b) {
+      b.span += (b.spanTarget - b.span) * 0.045;
+      if (Math.abs(b.spanTarget - b.span) > 0.02) return;
+      if (--b.wait > 0) return;
+      b.spanTarget = randSpan();
+      if (Math.random() < 0.35) {
+        b.col = Math.floor(Math.random() * (COLS - b.spanTarget + 1));
+      } else if (b.col + b.spanTarget > COLS) {
+        b.col = Math.max(0, COLS - b.spanTarget);
+      }
+      b.wait = 70 + Math.random() * 200;
+    }
+
+    function roundRect(x, y, rw, rh, r) {
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(x, y, rw, rh, r);
+        return;
+      }
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + rw, y, x + rw, y + rh, r);
+      ctx.arcTo(x + rw, y + rh, x, y + rh, r);
+      ctx.arcTo(x, y + rh, x, y, r);
+      ctx.arcTo(x, y, x + rw, y, r);
+      ctx.closePath();
     }
 
     function draw() {
@@ -104,72 +156,54 @@
       const dark = window.cvGetTheme() === "dark";
       ctx.clearRect(0, 0, w, h);
 
-      const starColor = dark ? [255, 255, 255] : [30, 36, 56];
-      const lineColor = "42,91,215";
       const scrollY = window.scrollY || window.pageYOffset || 0;
-
-      if (!reduceMotion) {
+      if (!prefersReducedMotion) {
         parSmooth.x += (parTarget.x - parSmooth.x) * 0.06;
         parSmooth.y += (parTarget.y - parSmooth.y) * 0.06;
       }
 
-      // near-mouse points only — avoids checking every point against every
-      // other point just to find the handful actually close to the cursor.
-      const near = [];
-      for (const p of points) {
-        if (!reduceMotion) {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0) p.x = w;
-          if (p.x > w) p.x = 0;
-          if (p.y < 0) p.y = h;
-          if (p.y > h) p.y = 0;
-          p.tw += 0.02;
-        }
-        const scrollShift = scrollY * p.depth * SCROLL_FACTOR;
-        p.px = p.x + parSmooth.x * p.depth * MAX_SHIFT;
-        p.py = wrap(p.y + parSmooth.y * p.depth * MAX_SHIFT - scrollShift, h);
-
-        const dm = Math.hypot(p.px - mouse.x, p.py - mouse.y);
-        if (dm <= MOUSE_RADIUS) near.push({ p, dm });
-      }
-
-      for (let a = 0; a < near.length; a++) {
-        const pa = near[a].p,
-          da = near[a].dm;
-        for (let b = a + 1; b < near.length; b++) {
-          const pb = near[b].p,
-            db = near[b].dm;
-          const d = Math.hypot(pa.px - pb.px, pa.py - pb.py);
-          if (d < LINK_DIST) {
-            const alpha =
-              (1 - d / LINK_DIST) *
-              (1 - Math.max(da, db) / MOUSE_RADIUS) *
-              (dark ? 0.7 : 0.5);
-            ctx.strokeStyle = "rgba(" + lineColor + "," + alpha + ")";
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(pa.px, pa.py);
-            ctx.lineTo(pb.px, pb.py);
-            ctx.stroke();
-          }
-        }
-        const alphaM = (1 - da / MOUSE_RADIUS) * (dark ? 0.9 : 0.6);
-        ctx.strokeStyle = "rgba(" + lineColor + "," + alphaM + ")";
-        ctx.lineWidth = 1;
+      // the column guides the blocks are snapping to
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = dark
+        ? "rgba(255,255,255,0.038)"
+        : "rgba(30,36,56,0.05)";
+      const guideShift = parSmooth.x * 10;
+      for (let c = 0; c <= COLS; c++) {
+        const gx = Math.round(originX + c * colW + guideShift) + 0.5;
         ctx.beginPath();
-        ctx.moveTo(pa.px, pa.py);
-        ctx.lineTo(mouse.x, mouse.y);
+        ctx.moveTo(gx, 0);
+        ctx.lineTo(gx, h);
         ctx.stroke();
       }
 
-      for (const pk of points) {
-        const twv = reduceMotion ? 0.6 : (Math.sin(pk.tw) + 1) / 2;
-        const alphaS = dark ? 0.35 + twv * 0.55 : 0.25 + twv * 0.45;
-        ctx.fillStyle = "rgba(" + starColor.join(",") + "," + alphaS + ")";
-        ctx.beginPath();
-        ctx.arc(pk.px, pk.py, pk.r, 0, Math.PI * 2);
-        ctx.fill();
+      for (const b of blocks) {
+        if (!prefersReducedMotion) settle(b);
+
+        const x = originX + b.col * colW + parSmooth.x * b.depth * MAX_SHIFT;
+        const y =
+          wrap(
+            b.y +
+              parSmooth.y * b.depth * MAX_SHIFT -
+              scrollY * b.depth * SCROLL_FACTOR,
+            h + 220
+          ) - 110;
+        const bw = Math.max(colW * 0.6, b.span * colW - 10);
+
+        const d = Math.hypot(x + bw / 2 - mouse.x, y + b.height / 2 - mouse.y);
+        const glow = d < GLOW_RADIUS ? 1 - d / GLOW_RADIUS : 0;
+
+        // stroked, not filled: filled slabs read as skeleton loaders, i.e. a
+        // page still loading. Outlines read as the wireframe they're meant to.
+        const base = b.accent ? (dark ? 0.14 : 0.12) : dark ? 0.06 : 0.055;
+        const alpha = base + glow * (b.accent ? 0.22 : 0.12);
+        ctx.strokeStyle = b.accent
+          ? "rgba(42,91,215," + alpha + ")"
+          : dark
+            ? "rgba(255,255,255," + alpha + ")"
+            : "rgba(30,36,56," + alpha + ")";
+        ctx.lineWidth = 1;
+        roundRect(x, y, bw, b.height, 6);
+        ctx.stroke();
       }
     }
 
@@ -179,7 +213,7 @@
         draw();
         lastFrame = now;
       }
-      if (!reduceMotion) requestAnimationFrame(loop);
+      if (!prefersReducedMotion) requestAnimationFrame(loop);
     }
 
     // canvas is pointer-events:none (it sits behind all page content), so
@@ -190,25 +224,29 @@
       mouse.y = e.clientY - rect.top;
       parTarget.x = (mouse.x / rect.width) * 2 - 1;
       parTarget.y = (mouse.y / rect.height) * 2 - 1;
-      if (reduceMotion) draw();
+      if (prefersReducedMotion) draw();
     });
     document.addEventListener("mouseleave", () => {
       mouse.x = -9999;
       mouse.y = -9999;
       parTarget.x = 0;
       parTarget.y = 0;
-      if (reduceMotion) draw();
+      if (prefersReducedMotion) draw();
     });
     window.addEventListener(
       "scroll",
       () => {
-        if (reduceMotion) draw();
+        if (prefersReducedMotion) draw();
       },
       { passive: true }
     );
     window.addEventListener("resize", () => {
       resize();
-      if (reduceMotion) draw();
+      if (prefersReducedMotion) draw();
+    });
+    // under reduced motion the loop isn't running, so repaint on theme change
+    window.addEventListener("cv-theme-change", () => {
+      if (prefersReducedMotion) draw();
     });
 
     resize();
@@ -328,6 +366,7 @@
   /* ---------- lightbox ---------- */
   let lbSlides = [];
   let lbIndex = 0;
+  let lbReturnFocus = null; // element to hand focus back to on close
   const lb = document.getElementById("lightbox");
   const lbImg = lb ? lb.querySelector(".lightbox__img") : null;
   const lbCounter = lb ? lb.querySelector(".lightbox__counter") : null;
@@ -342,14 +381,23 @@
     updateCounter();
     lb.classList.add("is-open");
     lb.setAttribute("aria-hidden", "false");
+    lb.setAttribute("aria-modal", "true");
     document.body.style.overflow = "hidden";
+    // a dialog that never takes focus leaves keyboard users tabbing the page
+    // behind it; remember where they were so Escape can put them back.
+    lbReturnFocus = document.activeElement;
+    const close = lb.querySelector(".lightbox__close");
+    if (close) close.focus();
   }
 
   function closeLightbox() {
     if (!lb) return;
     lb.classList.remove("is-open");
     lb.setAttribute("aria-hidden", "true");
+    lb.removeAttribute("aria-modal");
     document.body.style.overflow = "";
+    if (lbReturnFocus && lbReturnFocus.focus) lbReturnFocus.focus();
+    lbReturnFocus = null;
   }
 
   function lbGo(n) {
@@ -391,6 +439,20 @@
       if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowLeft") lbGo(lbIndex - 1);
       if (e.key === "ArrowRight") lbGo(lbIndex + 1);
+      if (e.key === "Tab") {
+        // keep Tab inside the dialog while it's open
+        const focusable = lb.querySelectorAll("button");
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
   }
 
@@ -403,6 +465,9 @@
 
     let current = 0;
     let timer = null;
+    // WCAG 2.2.2: auto-advancing content needs a way to stop it. Taking manual
+    // control — arrows, dots, or keyboard — parks the carousel for good.
+    let userControlled = false;
     const dotsWrap = slider.querySelector(".slider__dots");
     const prevBtn = slider.querySelector(".slider__prev");
     const nextBtn = slider.querySelector(".slider__next");
@@ -414,8 +479,7 @@
       dot.setAttribute("aria-label", "Image " + (i + 1));
       dot.addEventListener("click", (e) => {
         e.stopPropagation();
-        go(i);
-        restart();
+        takeControl(i);
       });
       if (dotsWrap) dotsWrap.appendChild(dot);
       dots.push(dot);
@@ -436,36 +500,60 @@
     }
 
     function start() {
-      if (slides.length <= 1) return;
+      if (slides.length <= 1 || userControlled || prefersReducedMotion) return;
+      clearInterval(timer);
       timer = setInterval(() => go(current + 1), 4000);
     }
 
-    function restart() {
+    function stop() {
       clearInterval(timer);
-      start();
+      timer = null;
+    }
+
+    // manual navigation doubles as the pause control
+    function takeControl(n) {
+      userControlled = true;
+      stop();
+      go(n);
     }
 
     if (prevBtn) {
       prevBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        go(current - 1);
-        restart();
+        takeControl(current - 1);
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        go(current + 1);
-        restart();
+        takeControl(current + 1);
       });
     }
 
-    slider.addEventListener("mouseenter", () => clearInterval(timer));
-    slider.addEventListener("mouseleave", () => {
-      if (slides.length > 1) start();
-    });
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+    slider.addEventListener("focusin", stop);
+    slider.addEventListener("focusout", start);
 
     slider.addEventListener("click", () => openLightbox(slides, current));
+
+    // The slider is a plain div carrying a click handler, so without this the
+    // project screenshots can't be opened by keyboard at all.
+    slider.tabIndex = 0;
+    slider.setAttribute("role", "button");
+    slider.setAttribute("aria-label", "Open image viewer");
+    slider.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openLightbox(slides, current);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        takeControl(current - 1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        takeControl(current + 1);
+      }
+    });
 
     start();
   });

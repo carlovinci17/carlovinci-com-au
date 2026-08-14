@@ -6,8 +6,22 @@
 :root {
   /* type */
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
-  --font-display: var(--font-sans);
+  /* Headings only. A grotesque, so it sits next to Helvetica without reading
+     as a second website — but with enough irregularity to look chosen. */
+  --font-display: "Bricolage Grotesque", var(--font-sans);
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* type scale — one ladder, no half-pixel drift.
+     Headings stay fluid via their own clamp()s. */
+  --fs-3xs: 11px; /* image chips, logo captions */
+  --fs-2xs: 12px; /* tags, mono meta, pills */
+  --fs-xs: 13px; /* eyebrows, capability labels, small buttons */
+  --fs-sm: 14px; /* nav, marquee, cert pills */
+  --fs-md: 15px; /* buttons, card body copy */
+  --fs-base: 17px; /* page body */
+  --fs-lg: 19px; /* lead paragraphs, card headings */
+  --fs-xl: 21px; /* project headings */
+  --fs-2xl: 26px; /* stat figures */
 
   /* accent (tweakable) */
   --accent: #2a5bd7;
@@ -30,7 +44,7 @@
   --surface-2: oklch(0.985 0.0015 250);
   --text: oklch(0.21 0.012 260);
   --text-2: oklch(0.46 0.012 260);
-  --text-3: oklch(0.6 0.01 260);
+  --text-3: oklch(0.54 0.01 260); /* 4.85:1 on --bg — 0.6 only reached 3.78:1 */
   --border: oklch(0.916 0.004 260);
   --border-2: oklch(0.86 0.006 260);
   --ring: color-mix(in oklch, var(--accent) 38%, transparent);
@@ -98,7 +112,7 @@ body {
   background: transparent;
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 17px;
+  font-size: var(--fs-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -186,7 +200,7 @@ img {
 /* mono kicker / eyebrow */
 .kicker {
   font-family: var(--font-mono);
-  font-size: 16.5px;
+  font-size: var(--fs-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
@@ -214,7 +228,7 @@ img {
 }
 .section-head p {
   color: var(--text-2);
-  font-size: 18px;
+  font-size: var(--fs-lg);
 }
 #work .section-head p {
   font-weight: 400;
@@ -230,7 +244,7 @@ img {
   align-items: center;
   gap: 8px;
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: var(--fs-md);
   font-weight: 600;
   letter-spacing: -0.01em;
   padding: 11px 18px;
@@ -293,9 +307,24 @@ img {
   background: color-mix(in oklch, var(--surface) 55%, transparent);
   border-color: var(--border-2);
 }
+.btn--ghost:hover {
+  background: color-mix(in oklch, var(--accent) 13%, var(--bg-btn));
+  border-color: var(--accent-line);
+  color: var(--accent);
+  box-shadow:
+    0 6px 20px color-mix(in oklch, var(--accent) 22%, transparent),
+    var(--glass-rim);
+}
+[data-theme="dark"] .btn--ghost:hover {
+  color: var(--accent-secondary);
+}
+/* GitHub mark is a blue fill; flatten it to white on the dark surface */
+[data-theme="dark"] .btn--ghost img {
+  filter: brightness(0) invert(1);
+}
 .btn--sm {
   padding: 8px 13px;
-  font-size: 13.5px;
+  font-size: var(--fs-xs);
 }
 .icon-btn {
   display: inline-grid;
@@ -344,7 +373,7 @@ img {
   margin-left: 14px;
 }
 .nav__links a {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   color: var(--text-2);
   font-weight: 500;
   padding: 8px 12px;
@@ -399,16 +428,6 @@ img {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.hero__meta .n {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-.hero__meta .l {
-  font-size: 13px;
-  color: var(--text-3);
-  margin-top: 2px;
 }
 .proj-grid {
   display: grid;
@@ -467,7 +486,7 @@ img {
   top: 14px;
   left: 14px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-3xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   background: color-mix(in oklch, var(--surface) 80%, transparent);
@@ -490,12 +509,12 @@ img {
   gap: 10px;
 }
 .proj__title h3 {
-  font-size: 21px;
+  font-size: var(--fs-xl);
   letter-spacing: -0.02em;
 }
 .proj__desc {
   color: var(--text-2);
-  font-size: 15.5px;
+  font-size: var(--fs-md);
   margin-bottom: 22px;
 }
 .tags {
@@ -505,7 +524,7 @@ img {
 }
 .tag {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--fs-2xs);
   letter-spacing: 0.01em;
   color: var(--text);
   background: var(--accent-soft);
@@ -526,7 +545,7 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 13px;
+  font-size: var(--fs-xs);
   color: var(--text-2);
 }
 .cap::before {
@@ -546,7 +565,7 @@ img {
 }
 .proj__tagline {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: var(--fs-2xs);
   letter-spacing: 0.01em;
   margin-top: 14px;
 }
@@ -561,7 +580,7 @@ img {
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--fs-2xs);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--accent-fg);
@@ -581,7 +600,7 @@ img {
   transform: translateY(-1px);
 }
 .proj__link--ghost {
-  color: var(--text-1);
+  color: var(--text);
   background: transparent;
   border: 1px solid var(--border);
 }
@@ -759,32 +778,9 @@ img {
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--fs-2xs);
   color: rgb(255 255 255 / 0.5);
   letter-spacing: 0.08em;
-}
-.gh-stat .n {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-.gh-stat .l {
-  font-size: 12.5px;
-  color: var(--text-3);
-  margin-top: 3px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.about__stats .n {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-.about__stats .l {
-  font-size: 13px;
-  color: var(--text-3);
-  margin-top: 4px;
 }
 .contact-card {
   background: linear-gradient(
@@ -835,7 +831,7 @@ img {
 }
 .contact-card p {
   color: var(--text-2);
-  font-size: 18px;
+  font-size: var(--fs-lg);
   max-width: 520px;
   margin: 18px auto 0;
   position: relative;
@@ -894,9 +890,7 @@ img {
   :root {
     --gutter: 16px;
     --section-y: 72px;
-  }
-  body {
-    font-size: 16px;
+    --fs-base: 16px;
   }
   .cs-top .nav__links {
     display: none;
@@ -1055,7 +1049,7 @@ img {
   align-items: center;
   padding: 14px 12px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: var(--fs-base);
   font-weight: 500;
   color: var(--text);
   border: 1px solid transparent;
@@ -1153,7 +1147,7 @@ img {
   align-items: center;
   gap: 9px;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: var(--fs-2xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
@@ -1202,7 +1196,7 @@ img {
   font-family: var(--font-sans);
   text-transform: none;
   letter-spacing: 0;
-  font-size: 13.5px;
+  font-size: var(--fs-xs);
   font-weight: 500;
   color: var(--text-2);
   background: var(--surface);
@@ -1238,7 +1232,7 @@ img {
 }
 .cs-pill {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: var(--fs-2xs);
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--accent);
@@ -1259,11 +1253,13 @@ img {
 }
 .cs-about + .cs-about {
   margin-top: 14px;
-  font-size: 18px;
+  font-size: var(--fs-lg);
 }
 .cs-hello {
+  font-family: var(--font-display);
   font-size: clamp(46px, 6.4vw, 78px);
-  letter-spacing: 0;
+  /* display sizes need the tracking pulled in; 0 was tuned for Helvetica */
+  letter-spacing: -0.02em;
   line-height: 1;
   margin-top: 4px;
   font-weight: 600;
@@ -1283,6 +1279,7 @@ img {
   max-width: 780px;
   line-height: 1.5;
   margin-top: 18px;
+  margin-bottom: 32px;
 }
 .cs-about--lead b {
   color: var(--accent-tertiary);
@@ -1301,12 +1298,12 @@ img {
   margin-top: 48px;
 }
 .cs-stats .n {
-  font-size: 26px;
+  font-size: var(--fs-2xl);
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 .cs-stats .l {
-  font-size: 13px;
+  font-size: var(--fs-xs);
   color: var(--text-3);
   margin-top: 2px;
 }
@@ -1374,7 +1371,7 @@ img {
 }
 .cs-cert__pill {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 500;
   letter-spacing: 0.05em;
   color: var(--text);
@@ -1400,13 +1397,6 @@ img {
 }
 [data-theme="dark"] .cs-cert:hover .cs-cert__pill {
   color: #fff;
-}
-.cs-card image-slot {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
 }
 
 /* continuous tech marquee */
@@ -1458,7 +1448,7 @@ img {
   align-items: center;
   gap: 9px;
   white-space: nowrap;
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--text-2);
   background: var(--surface);
@@ -1523,28 +1513,28 @@ img {
   height: 46px;
   border-radius: 12px;
   background: var(--accent-soft);
-  color: var(--accent-secondary);
+  /* cyan on the pale-blue wash measured 1.62:1 in light mode — near invisible.
+     --accent gives 4.95:1; the cyan only works against the dark surface. */
+  color: var(--accent);
   display: grid;
   place-items: center;
   margin-bottom: 20px;
+}
+[data-theme="dark"] .cs-svc__ic {
+  color: var(--accent-secondary);
 }
 .cs-svc__ic svg {
   width: 23px;
   height: 23px;
 }
 .cs-svc h3 {
-  font-size: 19px;
+  font-size: var(--fs-lg);
   letter-spacing: -0.02em;
 }
 .cs-svc p {
   color: var(--text-2);
-  font-size: 15px;
+  font-size: var(--fs-md);
   margin-top: 10px;
-}
-.cs-svc--placeholder .cs-svc__ic {
-  background: transparent;
-  border: 1px dashed var(--border-2);
-  color: var(--text-3);
 }
 @media (max-width: 560px) {
   .cs-services {
@@ -1555,8 +1545,10 @@ img {
 /* AI Solutions tool logo strip */
 .cs-svc__tools {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px 4px;
+  /* 7 columns forced the captions down to 9.5px just to fit. 4 columns match
+     the tablet/mobile layout and leave room for a legible label. */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px 4px;
   margin-top: 18px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
@@ -1589,7 +1581,7 @@ img {
 }
 .cs-svc__tool figcaption {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: var(--fs-3xs);
   letter-spacing: 0.02em;
   color: var(--text-3);
   white-space: nowrap;
@@ -1609,7 +1601,7 @@ img {
 }
 .cs-foot__meta {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: var(--fs-2xs);
   color: var(--text-3);
 }
 
@@ -1647,9 +1639,6 @@ img {
     gap: 24px;
     justify-content: center;
     text-align: center;
-  }
-  .cs-stats .l {
-    display: none;
   }
 }
 @media (max-width: 560px) {
