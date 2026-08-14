@@ -6,9 +6,7 @@
 :root {
   /* type */
   --font-sans: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
-  /* Headings only. A grotesque, so it sits next to Helvetica without reading
-     as a second website — but with enough irregularity to look chosen. */
-  --font-display: "Bricolage Grotesque", var(--font-sans);
+  --font-display: var(--font-sans);
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* type scale — one ladder, no half-pixel drift.
@@ -1269,10 +1267,8 @@ img {
   font-size: var(--fs-lg);
 }
 .cs-hello {
-  font-family: var(--font-display);
   font-size: clamp(46px, 6.4vw, 78px);
-  /* display sizes need the tracking pulled in; 0 was tuned for Helvetica */
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
   margin-top: 4px;
   font-weight: 600;
