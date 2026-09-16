@@ -33,7 +33,20 @@ npm run lint          # stylelint + htmlhint
 npm run format        # prettier --write
 ./shots.sh            # screenshots, both themes, 3 widths, into .shots/
 ./shots.sh 1440 dark  # just one
+
+.claude/skills/contrast-check/contrast.sh   # measured contrast, both themes
 ```
+
+## Skills
+
+In `.claude/skills/` — read the SKILL.md before doing that kind of work.
+
+- **contrast-check** — measures real contrast ratios on the rendered page.
+  Use it instead of hand-calculating; it resolves `oklch()`/`color-mix()` and
+  translucent stacks by compositing on a canvas. Exit 1 means a real failure.
+- **visual-review** — capture with `shots.sh` and actually read the PNGs.
+  Covers what to look for and what headless can't show.
+- **add-logo** — asset, markup and theme inversion for a tool-strip logo.
 
 There is **no test suite** — only linters. Don't describe a lint pass as
 "tests passing".

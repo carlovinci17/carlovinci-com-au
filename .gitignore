@@ -8,3 +8,4 @@ node_modules/
 # design review screenshots
 .shots/
 .shot-tmp.html
+.contrast-tmp.html
