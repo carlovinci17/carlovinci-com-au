@@ -3,7 +3,7 @@
 Ideas and features for carlovinci.com.au. Newest ideas go under **Backlog**;
 whatever is being worked on next sits at the top of **Next up**.
 
-**Open: 7** — 1 next up, 2 accessibility, 3 design, 1 code quality.
+**Open: 6** — 1 next up, 2 accessibility, 2 design, 1 code quality.
 
 ---
 
@@ -63,9 +63,6 @@ recreate that by cramming 11 logos into one row.
       Core rule: depth on frames, never on content.
 - [ ] **Thin out the glass.** Backdrop-filter is on ~11 surfaces, so it reads as
       haze rather than accent and lowers contrast throughout.
-- [ ] **Duplicate "Open to work" badge.** Appears in both the hero and the
-      contact card; the second adds nothing.
-
 ## Code quality
 
 - [ ] **`cs-` class prefix.** Legacy from when this was a coming-soon page.
@@ -85,3 +82,6 @@ _Nothing yet — add ideas here as they come up._
 - [x] Marquee skills exposed to screen readers; 6px loop seam fixed
 - [x] Service card copy realigned with headings, icons and tool strips
 - [x] Vercel deployment config — headers and caching
+- [x] "Open to work" removed — badge and availability copy gone from the page,
+      dead `.cs-badge` / `.cs-badge--open` / pulse CSS removed with it. This
+      also closed the duplicate-badge design item.

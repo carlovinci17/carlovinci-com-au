@@ -832,11 +832,6 @@ img {
   margin-top: 16px;
   position: relative;
 }
-.contact-card .cs-badge {
-  display: flex;
-  width: fit-content;
-  margin: 0 auto 18px;
-}
 .contact-card .kicker {
   justify-content: center;
 }
@@ -1153,47 +1148,6 @@ img {
   grid-row: 2;
 }
 
-.cs-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  padding: 7px 14px;
-  border-radius: 100px;
-  font-weight: 500;
-}
-.cs-badge .pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 var(--accent);
-  animation: cs-pulse 2.4s infinite;
-}
-@keyframes cs-pulse {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in oklch, var(--accent) 55%, transparent);
-  }
-  70% {
-    box-shadow: 0 0 0 9px transparent;
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cs-badge .pulse {
-    animation: none;
-  }
-}
-
-/* "Open to work" — neutral pill, site styling, green pulse */
 .cs-id-row {
   display: flex;
   align-items: center;
@@ -1202,38 +1156,6 @@ img {
 }
 .cs-id-row .cs-avatar {
   margin-bottom: 0;
-}
-.cs-badge--open {
-  font-family: var(--font-sans);
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  color: var(--text-2);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-}
-.cs-badge--open .pulse {
-  background: oklch(0.66 0.18 150);
-  box-shadow: none;
-  animation-name: cs-pulse-green;
-}
-@keyframes cs-pulse-green {
-  0% {
-    box-shadow: 0 0 0 0 oklch(0.66 0.18 150 / 0.55);
-  }
-  70% {
-    box-shadow: 0 0 0 9px transparent;
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cs-badge--open .pulse {
-    animation: none;
-  }
 }
 .cs-role {
   display: flex;
